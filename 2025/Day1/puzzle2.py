@@ -5,7 +5,7 @@ def main():
   dial = 50
   zeros = 0
   for line in input:
-    dial, zerosFound = rotate(dial, line)
+    dial, zerosFound = slowRotate(dial, line)
     zeros += zerosFound
   input.close()
   print(zeros)
@@ -35,15 +35,23 @@ def slowRotate(dial, action):
   start = dial
   direction = action[0]
   turnAmount = int(action[1:])
-  
+  zerosFound = 0
   operator = 1
   if(direction == "L"):
     operator = -1
-  if(turnAmount < 100):
-    dial += operator * turnAmount
-
-
-  return dial 
+  done = False
+  while(not done):
+    if(turnAmount > 100):
+      zerosFound += 1
+      turnAmount -= 100
+    else:
+      dial += operator * turnAmount
+      if(start != 0 and (dial <= 0 or dial > 99)):
+        zerosFound += 1
+      dial = dial % 100
+      done = True
+  return dial, zerosFound
+  
 
 
 main()
