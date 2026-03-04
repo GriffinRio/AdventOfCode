@@ -14,7 +14,7 @@ def main():
   print(sum(shortestCombos))
 
 def findShortestCombo(config, buttons, indicator, combo: list, shortest):
-  if(config == indicator or len(combo) >= shortest):
+  if(config == indicator or len(combo) >= shortest or len(combo) > 10):
     return len(combo)
   grades = []
   for button in buttons:
@@ -47,14 +47,14 @@ def gradeAction(goal, current):
     for i in range(len(current)):
       if(current[i] == "#"):
         if(goal[i] == "#"):
-          grade += 2
+          grade += 5
         else:
-          grade -= 2
+          grade -= 3
       else:
         if(goal[i] == "#"):
-          grade -= 2
+          grade -= 1
         else:
-          grade += 1
+          grade += 2
 
   return grade
 
